@@ -20,6 +20,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from pandas import DataFrame
 
+from sklearn.cross_validation import StratifiedShuffleSplit
 from sklearn.model_selection import train_test_split
 from sklearn import tree
 from sklearn.feature_selection import SelectKBest
@@ -73,6 +74,9 @@ upper_o = pd.DataFrame((df[features_filt] > upper[features_filt]).sum(axis = 1),
 
 # Removing an outlier
 df = df.drop(['TOTAL'])
+df = df.drop(['THE TRAVEL AGENCY IN THE PARK'])
+
+# Removing too sparcely populated features
 df = df.drop(['loan_advances','director_fees','restricted_stock_deferred', 'email_address'], 1)
 
 # Adding new features
@@ -118,55 +122,65 @@ features_list_full.insert(0, 'poi')
 data = featureFormat(my_dataset, features_list_full)
 labels, features = targetFeatureSplit(data)
 
-#Function to try classifiers several times and select the best features
-def best_features (features, labels, size, features_list): 
-    # Dictionary to store the results
-    best_f_dict = dict.fromkeys(features_list, 0)
+# Selecting the most significant features 
+# Create a dictionary to populate 
+best_f_dict = dict.fromkeys(features_used, 0)
+
+# Create a Stratified ShuffleSplit cross-validato with 10 splits (folds)
+# 10 is a default value, which should be enough for a dataset containing 144 values
+cv = StratifiedShuffleSplit(labels, 10)
+
+# Try classifiers on folds and select the best features
+for train_idx, test_idx in cv:
+    features_train = []
+    features_test  = []
+    labels_train   = []
+    labels_test    = []
     
-    # Loop 10 times using shuffled train/test samples
-    for x in range(0, 9):
-        # Split the dataset
-        features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=size)
-        clf = tree.DecisionTreeClassifier()
-        clf.fit(features_train, labels_train)
-
-        # Detect most important features from the tree
-        importances = clf.feature_importances_
-        indices = np.argsort(importances)[::-1]
+    for ii in train_idx:
+        features_train.append( features[ii] )
+        labels_train.append( labels[ii] )
+    for jj in test_idx:
+        features_test.append( features[jj] )
+        labels_test.append( labels[jj] )
         
-        # Get 10 most important features 
-        for i in range(10):
-            best_f_val = features_list[indices[i]]
-            best_f_dict[best_f_val] = best_f_dict[best_f_val] + 1
+    # Create a Decision Tree classifier 
+    clf = tree.DecisionTreeClassifier()    
+    # Fit the classifier using training set, and test on test set
+    clf.fit(features_train, labels_train)
+    # Detect most important features from the tree
+    importances = clf.feature_importances_
+    indices = np.argsort(importances)[::-1]   
+    # Get 10 most important features of the Decision tree 
+    for i in range(10):
+        best_f_val = features_used[indices[i]]
+        best_f_dict[best_f_val] = best_f_dict[best_f_val] + 1
 
-        # Detect most important features using SelectKBest
-        selector = SelectKBest(chi2, k=10)
-        selector.fit(features_train, labels_train)
-        features_train_transformed = selector.transform(features_train) 
-        support = np.asarray(selector.get_support())
+    # Detect most important features using SelectKBest
+    selector = SelectKBest(chi2, k=10)
+    selector.fit(features_train, labels_train)
+    features_train_transformed = selector.transform(features_train) 
+    support = np.asarray(selector.get_support())
         
-        # Get an array with the most important features 
-        features_used = np.asarray(features_list)
-        columns_support = features_used[support]
-        for val in columns_support: 
-            best_f_dict[val] = best_f_dict[val] + 1
-    
-    return best_f_dict
+    # Get an array with the most important features 
+    features_arr = np.asarray(features_used)
+    columns_support = features_arr[support]
+    for val in columns_support: 
+        best_f_dict[val] = best_f_dict[val] + 1
+        
+# Get the list of sorted features sorted by their importance 
+best_f_list = sorted(best_f_dict.iteritems(), key=operator.itemgetter(1), reverse=True)
 
-best_f_dict = best_features(features, labels, 0.3, features_used)
+print "The most important features:"
+pprint.pprint(best_f_list)
 
-# Get the top 10 features. 
-# The maximum value is 20 if the feature was selected as the most important in both methods in each of 10 splits
-best_f_list = sorted(best_f_dict.iteritems(), key=operator.itemgetter(1), reverse=True)[:10]
-
-#print "The most important features:"
-#pprint.pprint(best_f_list)
-
-# Save the list of features for future reference 
+# Save the list of features for future reference, sorted by their importance
 features_filtered = []
 for val in best_f_list: 
     features_filtered.append(val[0])
 
+# Final feature list after several rounds of testing 
+features_filtered = ['exercised_stock_options', 'total_stock_value', 'f_shared_receipt_with_poi', 'bonus', 'total_payments', 'f_to_poi', 'f_long_term_incentive', 'other', 'salary', 'restricted_stock', 'f_from_poi', 'deferred_income', 'f_restricted_stock', 'expenses', 'deferral_payments']
 
 # Prepare features list for tester and for data split 
 features_tester = list(features_filtered)
@@ -174,7 +188,36 @@ features_tester.insert(0, 'poi')
 
 data = featureFormat(my_dataset, features_tester)
 labels, features = targetFeatureSplit(data)
-features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.3)
+
+## Decision Tree Classifier 
+
+# Create a function which return shuffled testing and training sets 
+def shuffle_split(labels, features): 
+    features_train = []
+    features_test  = []
+    labels_train   = []
+    labels_test    = []   
+    # 10 is a default value, which should be enough for a dataset containing 144 values
+    cv = StratifiedShuffleSplit(labels, 10)
+    # Create leatures and labels shuffled dataset
+    for train_idx, test_idx in cv:    
+        for ii in train_idx:
+            features_train.append( features[ii] )
+            labels_train.append( labels[ii] )
+        for jj in test_idx:
+            features_test.append( features[jj] )
+            labels_test.append( labels[jj] )
+
+        for ii in train_idx:
+            features_train.append( features[ii] )
+            labels_train.append( labels[ii] )
+        for jj in test_idx:
+            features_test.append( features[jj] )
+            labels_test.append( labels[jj] )
+    return features_train, features_test, labels_train, labels_test
+
+# Get the shuffled sets
+features_train, features_test, labels_train, labels_test = shuffle_split(labels, features)
 
 # Create and use a classifier 
 clf_tree = tree.DecisionTreeClassifier()
@@ -184,23 +227,45 @@ clf_tree.fit(features_train, labels_train)
 tester.dump_classifier_and_data(clf_tree, my_dataset, features_tester)
 tester.main() 
 
+## GaussianNB with feature selection and PCA
 clf_gnb_n = GaussianNB()
 
-# Feature selection
+# feature selection
 features_list2 = ['poi'] + range(3)
 my_dataset1 = pd.DataFrame(SelectKBest(f_classif, k=8).fit_transform(df, df.poi), index = df.index)
 
-# PCA
+#PCA
 pca = PCA(n_components=3)
-my_dataset2 = pd.DataFrame(pca.fit_transform(my_dataset1),  index=df.index)
+my_dataset2 = pd.DataFrame(pca.fit_transform(my_dataset1), index=df.index)
 my_dataset2.insert(0, "poi", df.poi)
 my_dataset2 = my_dataset2.to_dict(orient = 'index')  
 
-# Tester
-dump_classifier_and_data(clf_gnb_n, my_dataset2, features_list2)
+# Change the structure 
+features_list_full_pca = my_dataset2.itervalues().next().keys()
+# POI at the first position for further use with preprocessing functions 
+features_list_full_pca.remove('poi')
+features_list_full_pca.insert(0, 'poi')
+
+# Use preprocessing functions 
+data_pca = featureFormat(my_dataset2, features_list_full_pca)
+labels_pca, features_pca = targetFeatureSplit(data_pca)
+
+# Get the shuffled sets
+features_train, features_test, labels_train, labels_test = shuffle_split(labels_pca, features_pca)
+
+# GaussianNB implementation on the reformatted data
+clf_gnb = GaussianNB()
+clf_gnb.fit(features_train, labels_train)
+
+tester.dump_classifier_and_data(clf_gnb, my_dataset2, features_list_full_pca)
 tester.main()
 
-# GaussianNB implementation
+## GaussianNB without feature selection and PCA
+
+# Get the shuffled sets
+features_train, features_test, labels_train, labels_test = shuffle_split(labels, features)
+
+# GaussianNB
 clf_gnb = GaussianNB()
 clf_gnb.fit(features_train, labels_train)
 pred = clf_gnb.predict(features_test)
@@ -208,7 +273,11 @@ pred = clf_gnb.predict(features_test)
 tester.dump_classifier_and_data(clf_gnb, my_dataset, features_tester)
 tester.main()
 
-# kNN 
+## kNN 
+
+# Get the shuffled sets
+features_train, features_test, labels_train, labels_test = shuffle_split(labels, features)
+
 clf_knn = KNeighborsClassifier()
 clf_knn.fit(features_train, labels_train)
 
@@ -236,22 +305,14 @@ clf_tree.fit(features_train, labels_train)
 
 print "Best parameters for the selected algorithm:", clf_tree.best_params_
 
-# Using the parameters
+# Using the parameters. Finalise: best parameters and algorithm
 clf_tree = tree.DecisionTreeClassifier(min_samples_split = 2,
                              splitter = 'best',
                              min_samples_leaf = 1)
 
 clf_tree.fit(features_train, labels_train)
 
-### Finalise: best parameters and algorithm
-
-clf_tree = tree.DecisionTreeClassifier(min_samples_split = 5,
-                             splitter = 'best',
-                             min_samples_leaf = 6)
-clf_tree.fit(features_train, labels_train)
-
-features_tester = ['poi', 'shared_receipt_with_poi', 'total_stock_value', 'f_to_poi', 
-'exercised_stock_options', 'f_long_term_incentive', 'f_bonus', 'from_this_person_to_poi', 'total_payments']
+### Evaluation 
 
 print "\nFinal evaluation\n"
 

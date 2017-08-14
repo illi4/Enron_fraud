@@ -11795,7 +11795,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="ch">#!/usr/bin/python</span>
@@ -11807,9 +11807,10 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../tools/&quot;</span><span class="p">)</span>
-
+<span class="kn">import</span> <span class="nn">tester</span>
 <span class="kn">from</span> <span class="nn">feature_format</span> <span class="kn">import</span> <span class="n">featureFormat</span><span class="p">,</span> <span class="n">targetFeatureSplit</span>
 <span class="kn">from</span> <span class="nn">tester</span> <span class="kn">import</span> <span class="n">dump_classifier_and_data</span>
+<span class="kn">import</span> <span class="nn">tester</span>
 
 <span class="c1">### Load the dictionary containing the dataset</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;final_project_dataset.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data_file</span><span class="p">:</span>
@@ -11830,7 +11831,7 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[42]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12019,7 +12020,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Dataframe information</span>
@@ -12092,7 +12093,7 @@ Total NaN: 1358 (44.29%)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Allocation between classes</span>
@@ -12169,7 +12170,7 @@ Name: poi, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Upper fence value to detect outliers</span>
@@ -12230,11 +12231,121 @@ WHALLEY LAWRENCE G                    9
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># exclude an outlier</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Exclude an outlier</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;TOTAL&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Additionally, let's take a quick skim through on the indexes of our dataframe to detect anything unusual or incorrect.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Get indexes</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[47]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([&#39;ALLEN PHILLIP K&#39;, &#39;BADUM JAMES P&#39;, &#39;BANNANTINE JAMES M&#39;,
+       &#39;BAXTER JOHN C&#39;, &#39;BAY FRANKLIN R&#39;, &#39;BAZELIDES PHILIP J&#39;,
+       &#39;BECK SALLY W&#39;, &#39;BELDEN TIMOTHY N&#39;, &#39;BELFER ROBERT&#39;,
+       &#39;BERBERIAN DAVID&#39;, &#39;BERGSIEKER RICHARD P&#39;, &#39;BHATNAGAR SANJAY&#39;,
+       &#39;BIBI PHILIPPE A&#39;, &#39;BLACHMAN JEREMY M&#39;, &#39;BLAKE JR. NORMAN P&#39;,
+       &#39;BOWEN JR RAYMOND M&#39;, &#39;BROWN MICHAEL&#39;, &#39;BUCHANAN HAROLD G&#39;,
+       &#39;BUTTS ROBERT H&#39;, &#39;BUY RICHARD B&#39;, &#39;CALGER CHRISTOPHER F&#39;,
+       &#39;CARTER REBECCA C&#39;, &#39;CAUSEY RICHARD A&#39;, &#39;CHAN RONNIE&#39;,
+       &#39;CHRISTODOULOU DIOMEDES&#39;, &#39;CLINE KENNETH W&#39;, &#39;COLWELL WESLEY&#39;,
+       &#39;CORDES WILLIAM R&#39;, &#39;COX DAVID&#39;, &#39;CUMBERLAND MICHAEL S&#39;,
+       &#39;DEFFNER JOSEPH M&#39;, &#39;DELAINEY DAVID W&#39;, &#39;DERRICK JR. JAMES V&#39;,
+       &#39;DETMERING TIMOTHY J&#39;, &#39;DIETRICH JANET R&#39;, &#39;DIMICHELE RICHARD G&#39;,
+       &#39;DODSON KEITH&#39;, &#39;DONAHUE JR JEFFREY M&#39;, &#39;DUNCAN JOHN H&#39;,
+       &#39;DURAN WILLIAM D&#39;, &#39;ECHOLS JOHN B&#39;, &#39;ELLIOTT STEVEN&#39;,
+       &#39;FALLON JAMES B&#39;, &#39;FASTOW ANDREW S&#39;, &#39;FITZGERALD JAY L&#39;,
+       &#39;FOWLER PEGGY&#39;, &#39;FOY JOE&#39;, &#39;FREVERT MARK A&#39;, &#39;FUGH JOHN L&#39;,
+       &#39;GAHN ROBERT S&#39;, &#39;GARLAND C KEVIN&#39;, &#39;GATHMANN WILLIAM D&#39;,
+       &#39;GIBBS DANA R&#39;, &#39;GILLIS JOHN&#39;, &#39;GLISAN JR BEN F&#39;, &#39;GOLD JOSEPH&#39;,
+       &#39;GRAMM WENDY L&#39;, &#39;GRAY RODNEY&#39;, &#39;HAEDICKE MARK E&#39;, &#39;HANNON KEVIN P&#39;,
+       &#39;HAUG DAVID L&#39;, &#39;HAYES ROBERT E&#39;, &#39;HAYSLETT RODERICK J&#39;,
+       &#39;HERMANN ROBERT J&#39;, &#39;HICKERSON GARY J&#39;, &#39;HIRKO JOSEPH&#39;,
+       &#39;HORTON STANLEY C&#39;, &#39;HUGHES JAMES A&#39;, &#39;HUMPHREY GENE E&#39;,
+       &#39;IZZO LAWRENCE L&#39;, &#39;JACKSON CHARLENE R&#39;, &#39;JAEDICKE ROBERT&#39;,
+       &#39;KAMINSKI WINCENTY J&#39;, &#39;KEAN STEVEN J&#39;, &#39;KISHKILL JOSEPH G&#39;,
+       &#39;KITCHEN LOUISE&#39;, &#39;KOENIG MARK E&#39;, &#39;KOPPER MICHAEL J&#39;,
+       &#39;LAVORATO JOHN J&#39;, &#39;LAY KENNETH L&#39;, &#39;LEFF DANIEL P&#39;,
+       &#39;LEMAISTRE CHARLES&#39;, &#39;LEWIS RICHARD&#39;, &#39;LINDHOLM TOD A&#39;,
+       &#39;LOCKHART EUGENE E&#39;, &#39;LOWRY CHARLES P&#39;, &#39;MARTIN AMANDA K&#39;,
+       &#39;MCCARTY DANNY J&#39;, &#39;MCCLELLAN GEORGE&#39;, &#39;MCCONNELL MICHAEL S&#39;,
+       &#39;MCDONALD REBECCA&#39;, &#39;MCMAHON JEFFREY&#39;, &#39;MENDELSOHN JOHN&#39;,
+       &#39;METTS MARK&#39;, &#39;MEYER JEROME J&#39;, &#39;MEYER ROCKFORD G&#39;,
+       &#39;MORAN MICHAEL P&#39;, &#39;MORDAUNT KRISTINA M&#39;, &#39;MULLER MARK S&#39;,
+       &#39;MURRAY JULIA H&#39;, &#39;NOLES JAMES L&#39;, &#39;OLSON CINDY K&#39;,
+       &#39;OVERDYKE JR JERE C&#39;, &#39;PAI LOU L&#39;, &#39;PEREIRA PAULO V. FERRAZ&#39;,
+       &#39;PICKERING MARK R&#39;, &#39;PIPER GREGORY F&#39;, &#39;PIRO JIM&#39;, &#39;POWERS WILLIAM&#39;,
+       &#39;PRENTICE JAMES&#39;, &#39;REDMOND BRIAN L&#39;, &#39;REYNOLDS LAWRENCE&#39;,
+       &#39;RICE KENNETH D&#39;, &#39;RIEKER PAULA H&#39;, &#39;SAVAGE FRANK&#39;,
+       &#39;SCRIMSHAW MATTHEW&#39;, &#39;SHANKMAN JEFFREY A&#39;, &#39;SHAPIRO RICHARD S&#39;,
+       &#39;SHARP VICTORIA T&#39;, &#39;SHELBY REX&#39;, &#39;SHERRICK JEFFREY B&#39;,
+       &#39;SHERRIFF JOHN R&#39;, &#39;SKILLING JEFFREY K&#39;, &#39;STABLER FRANK&#39;,
+       &#39;SULLIVAN-SHAKLOVITZ COLLEEN&#39;, &#39;SUNDE MARTIN&#39;, &#39;TAYLOR MITCHELL S&#39;,
+       &#39;THE TRAVEL AGENCY IN THE PARK&#39;, &#39;THORN TERENCE H&#39;,
+       &#39;TILNEY ELIZABETH A&#39;, &#39;UMANOFF ADAM S&#39;, &#39;URQUHART JOHN A&#39;,
+       &#39;WAKEHAM JOHN&#39;, &#39;WALLS JR ROBERT H&#39;, &#39;WALTERS GARETH W&#39;,
+       &#39;WASAFF GEORGE&#39;, &#39;WESTFAHL RICHARD K&#39;, &#39;WHALEY DAVID A&#39;,
+       &#39;WHALLEY LAWRENCE G&#39;, &#39;WHITE JR THOMAS E&#39;, &#39;WINOKUR JR. HERBERT S&#39;,
+       &#39;WODRASKA JOHN&#39;, &#39;WROBEL BRUCE&#39;, &#39;YEAGER F SCOTT&#39;, &#39;YEAP SOON&#39;], dtype=object)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The index 'THE TRAVEL AGENCY IN THE PARK' is definitely not a person - let's also exclude it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Exclude an outlier</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;THE TRAVEL AGENCY IN THE PARK&#39;</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12263,7 +12374,7 @@ WHALLEY LAWRENCE G                    9
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;loan_advances&#39;</span><span class="p">,</span><span class="s1">&#39;director_fees&#39;</span><span class="p">,</span><span class="s1">&#39;restricted_stock_deferred&#39;</span><span class="p">,</span> <span class="s1">&#39;email_address&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
@@ -12286,7 +12397,7 @@ WHALLEY LAWRENCE G                    9
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">poi</span> <span class="o">==</span> <span class="bp">True</span><span class="p">)]</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -12334,7 +12445,7 @@ memory usage: 2.4+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">poi</span> <span class="o">==</span> <span class="bp">False</span><span class="p">)]</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -12351,12 +12462,12 @@ memory usage: 2.4+ KB
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-Index: 127 entries, ALLEN PHILLIP K to YEAP SOON
+Index: 126 entries, ALLEN PHILLIP K to YEAP SOON
 Data columns (total 17 columns):
 salary                     77 non-null float64
 to_messages                72 non-null float64
 deferral_payments          33 non-null float64
-total_payments             106 non-null float64
+total_payments             105 non-null float64
 exercised_stock_options    89 non-null float64
 bonus                      65 non-null float64
 restricted_stock           92 non-null float64
@@ -12364,14 +12475,14 @@ shared_receipt_with_poi    72 non-null float64
 total_stock_value          107 non-null float64
 expenses                   76 non-null float64
 from_messages              72 non-null float64
-other                      74 non-null float64
+other                      73 non-null float64
 from_this_person_to_poi    72 non-null float64
-poi                        127 non-null bool
+poi                        126 non-null bool
 deferred_income            37 non-null float64
 long_term_incentive        53 non-null float64
 from_poi_to_this_person    72 non-null float64
 dtypes: bool(1), float64(16)
-memory usage: 17.0+ KB
+memory usage: 16.9+ KB
 </pre>
 </div>
 </div>
@@ -12385,7 +12496,7 @@ memory usage: 17.0+ KB
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This looks fine. Now, considering the relationships between features and relativity of their values, we will create a set of new ones. For instance, salary is a part of total_payments so the fraction of them intuitively feels like a better indicator for comparison betweeen employees. We will add the following features:</p>
+<p>This looks fine. Now, considering the relationships between features and relativity of their values, we will create a set of new ones. For instance, salary is a part of total_payments so the fraction of them intuitively feels like a better indicator for comparison betweeen employees. We will add the following features for further selection of the best ones (on the step 'intelligently select features'):</p>
 <ul>
 <li>f_bonus (bonus/total_payments)</li>
 <li>f_salary (salary/total_payments)</li>
@@ -12399,7 +12510,7 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;f_bonus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bonus&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;total_payments&#39;</span><span class="p">]</span>
@@ -12426,7 +12537,7 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;f_from_poi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;to_messages&#39;</span><span class="p">]</span>
@@ -12520,7 +12631,7 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
@@ -12548,7 +12659,7 @@ memory usage: 17.0+ KB
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[54]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
@@ -12746,7 +12857,7 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Convert to a dictionary and use preprocessing functions. </span>
@@ -12786,62 +12897,69 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">StratifiedShuffleSplit</span>
+
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span>
 <span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">chi2</span>
 <span class="c1"># To sort the result</span>
 <span class="kn">import</span> <span class="nn">operator</span>
 
-<span class="c1">#Function to try classifiers several times and select the best features</span>
+<span class="c1"># Create a dictionary to populate </span>
+<span class="n">best_f_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">features_used</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">best_features</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">features_list</span><span class="p">):</span> 
-    <span class="c1"># Dictionary to store the results</span>
-    <span class="n">best_f_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">features_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Create a Stratified ShuffleSplit cross-validaton with 10 splits (folds)</span>
+<span class="c1"># 10 is a default value, which should be enough for a dataset containing 144 values</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Try classifiers on folds and select the best features</span>
+<span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="ow">in</span> <span class="n">cv</span><span class="p">:</span>
+    <span class="n">features_train</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">features_test</span>  <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels_train</span>   <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels_test</span>    <span class="o">=</span> <span class="p">[]</span>
     
-    <span class="c1"># Loop 10 times using shuffled train/test samples</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
-        <span class="c1"># Split the dataset</span>
-        <span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
-        <span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
-        <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
-
-        <span class="c1"># Detect most important features from the tree</span>
-        <span class="n">importances</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span>
-        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">importances</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">train_idx</span><span class="p">:</span>
+        <span class="n">features_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">features</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="p">)</span>
+        <span class="n">labels_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">labels</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="p">)</span>
+    <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="n">test_idx</span><span class="p">:</span>
+        <span class="n">features_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">features</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="p">)</span>
+        <span class="n">labels_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">labels</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="p">)</span>
         
-        <span class="c1"># Get 10 most important features </span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-            <span class="n">best_f_val</span> <span class="o">=</span> <span class="n">features_list</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-            <span class="n">best_f_dict</span><span class="p">[</span><span class="n">best_f_val</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_f_dict</span><span class="p">[</span><span class="n">best_f_val</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1"># Create a Decision Tree classifier </span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>    
+    <span class="c1"># Fit the classifier using training set, and test on test set</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+    <span class="c1"># Detect most important features from the tree</span>
+    <span class="n">importances</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">feature_importances_</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">importances</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   
+    <span class="c1"># Get 10 most important features of the Decision tree </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">best_f_val</span> <span class="o">=</span> <span class="n">features_used</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="n">best_f_dict</span><span class="p">[</span><span class="n">best_f_val</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_f_dict</span><span class="p">[</span><span class="n">best_f_val</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
 
-        <span class="c1"># Detect most important features using SelectKBest</span>
-        <span class="n">selector</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
-        <span class="n">features_train_transformed</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">features_train</span><span class="p">)</span> 
-        <span class="n">support</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">())</span>
+    <span class="c1"># Detect most important features using SelectKBest</span>
+    <span class="n">selector</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">selector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+    <span class="n">features_train_transformed</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">features_train</span><span class="p">)</span> 
+    <span class="n">support</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">selector</span><span class="o">.</span><span class="n">get_support</span><span class="p">())</span>
         
-        <span class="c1"># Get an array with the most important features </span>
-        <span class="n">features_used</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">features_list</span><span class="p">)</span>
-        <span class="n">columns_support</span> <span class="o">=</span> <span class="n">features_used</span><span class="p">[</span><span class="n">support</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">columns_support</span><span class="p">:</span> 
-            <span class="n">best_f_dict</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_f_dict</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-    
-    <span class="k">return</span> <span class="n">best_f_dict</span>
-
-<span class="n">best_f_dict</span> <span class="o">=</span> <span class="n">best_features</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">features_used</span><span class="p">)</span>
-
-<span class="c1"># Get the top 10 features. </span>
-<span class="c1"># The maximum value is 20 if the feature was selected as the most important in both methods in each of 10 splits</span>
-<span class="n">best_f_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">best_f_dict</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+    <span class="c1"># Get an array with the most important features </span>
+    <span class="n">features_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">features_used</span><span class="p">)</span>
+    <span class="n">columns_support</span> <span class="o">=</span> <span class="n">features_arr</span><span class="p">[</span><span class="n">support</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">columns_support</span><span class="p">:</span> 
+        <span class="n">best_f_dict</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_f_dict</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+        
+<span class="c1"># Get the list of sorted features sorted by their importance </span>
+<span class="n">best_f_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">best_f_dict</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="s2">&quot;The most important features:&quot;</span>
 <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">best_f_list</span><span class="p">)</span>
 
-<span class="c1"># Save the list of features for future reference </span>
+<span class="c1"># Save the list of features for future reference, sorted by their importance</span>
 <span class="n">features_filtered</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">best_f_list</span><span class="p">:</span> 
     <span class="n">features_filtered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -12858,16 +12976,30 @@ memory usage: 17.0+ KB
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>The most important features:
-[(&#39;shared_receipt_with_poi&#39;, 15),
- (&#39;total_stock_value&#39;, 15),
- (&#39;f_to_poi&#39;, 15),
- (&#39;exercised_stock_options&#39;, 14),
- (&#39;f_long_term_incentive&#39;, 14),
- (&#39;f_bonus&#39;, 13),
- (&#39;f_shared_receipt_with_poi&#39;, 13),
- (&#39;bonus&#39;, 11),
- (&#39;from_this_person_to_poi&#39;, 10),
- (&#39;total_payments&#39;, 8)]
+[(&#39;exercised_stock_options&#39;, 19),
+ (&#39;total_stock_value&#39;, 18),
+ (&#39;f_shared_receipt_with_poi&#39;, 17),
+ (&#39;bonus&#39;, 15),
+ (&#39;shared_receipt_with_poi&#39;, 13),
+ (&#39;total_payments&#39;, 13),
+ (&#39;f_to_poi&#39;, 12),
+ (&#39;f_long_term_incentive&#39;, 12),
+ (&#39;other&#39;, 11),
+ (&#39;f_bonus&#39;, 10),
+ (&#39;salary&#39;, 10),
+ (&#39;from_poi_to_this_person&#39;, 7),
+ (&#39;restricted_stock&#39;, 7),
+ (&#39;long_term_incentive&#39;, 6),
+ (&#39;f_from_poi&#39;, 6),
+ (&#39;from_this_person_to_poi&#39;, 5),
+ (&#39;deferred_income&#39;, 4),
+ (&#39;f_restricted_stock&#39;, 4),
+ (&#39;expenses&#39;, 3),
+ (&#39;from_messages&#39;, 3),
+ (&#39;f_exercised_stock_options&#39;, 3),
+ (&#39;to_messages&#39;, 1),
+ (&#39;f_salary&#39;, 1),
+ (&#39;deferral_payments&#39;, 0)]
 </pre>
 </div>
 </div>
@@ -12881,18 +13013,38 @@ memory usage: 17.0+ KB
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The feature f_shared_receipt_with_poi is a worse choice than shared_receipt_with_poi (while being directly correlated) - let's remove f_shared_receipt_with_poi from the final list of features. Same with 'bonus'.</p>
+<p>We will delete correlated features, leaving either the original or the added feature depending on their significance. Note that:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The following features should be deleted as they perform worse than the correlated: shared_receipt_with_poi, f_bonus, long_term_incentive, f_exercised_stock_options, f_salary</li>
+<li>f_from_poi is more significant than to_messages, and slightly worse than from_poi_to_this_person. Thus, we will remove to_messages and from_poi_to_this_person. </li>
+<li>f_to_poi is more significant than both from_this_person_to_poi and from_messages. We will remove from_this_person_to_poi and from_messages. </li>
+<li>Similarly, f_shared_receipt_with_poi is more significant than shared_receipt_with_poi and to_messages, but we have already planned to remove the latter two. </li>
+</ul>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">features_filtered</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;f_shared_receipt_with_poi&#39;</span><span class="p">)</span>
-<span class="n">features_filtered</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;bonus&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">rm_features</span><span class="p">(</span><span class="n">feature_list</span><span class="p">,</span> <span class="n">rm_feature_list</span><span class="p">):</span> 
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">rm_feature_list</span><span class="p">:</span> 
+        <span class="n">feature_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+<span class="n">rm_features</span><span class="p">(</span><span class="n">features_filtered</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;shared_receipt_with_poi&#39;</span><span class="p">,</span> <span class="s1">&#39;f_bonus&#39;</span><span class="p">,</span> <span class="s1">&#39;long_term_incentive&#39;</span><span class="p">,</span> 
+                                <span class="s1">&#39;f_exercised_stock_options&#39;</span><span class="p">,</span> <span class="s1">&#39;f_salary&#39;</span><span class="p">,</span> <span class="s1">&#39;to_messages&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;from_poi_to_this_person&#39;</span><span class="p">,</span> <span class="s1">&#39;from_this_person_to_poi&#39;</span><span class="p">,</span> <span class="s1">&#39;from_messages&#39;</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12931,7 +13083,7 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Prepare features list for tester and for data split </span>
@@ -12940,7 +13092,34 @@ memory usage: 17.0+ KB
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">featureFormat</span><span class="p">(</span><span class="n">my_dataset</span><span class="p">,</span> <span class="n">features_tester</span><span class="p">)</span>
 <span class="n">labels</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="n">targetFeatureSplit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Create a function which return shuffled testing and training sets </span>
+<span class="k">def</span> <span class="nf">shuffle_split</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span> 
+    <span class="n">features_train</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">features_test</span>  <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels_train</span>   <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">labels_test</span>    <span class="o">=</span> <span class="p">[]</span>   
+    <span class="c1"># 10 is a default value, which should be enough for a dataset containing 144 values</span>
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># Create leatures and labels shuffled dataset</span>
+    <span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="ow">in</span> <span class="n">cv</span><span class="p">:</span>    
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">train_idx</span><span class="p">:</span>
+            <span class="n">features_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">features</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="p">)</span>
+            <span class="n">labels_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">labels</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="p">)</span>
+        <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="n">test_idx</span><span class="p">:</span>
+            <span class="n">features_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">features</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="p">)</span>
+            <span class="n">labels_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">labels</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">train_idx</span><span class="p">:</span>
+            <span class="n">features_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">features</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="p">)</span>
+            <span class="n">labels_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">labels</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="p">)</span>
+        <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="n">test_idx</span><span class="p">:</span>
+            <span class="n">features_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">features</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="p">)</span>
+            <span class="n">labels_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">labels</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span>
+
+<span class="c1"># Get the shuffled sets</span>
+<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">shuffle_split</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
 
 <span class="c1"># Create and use a classifier </span>
 <span class="n">clf_tree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
@@ -12966,8 +13145,8 @@ memory usage: 17.0+ KB
             min_impurity_split=1e-07, min_samples_leaf=1,
             min_samples_split=2, min_weight_fraction_leaf=0.0,
             presort=False, random_state=None, splitter=&#39;best&#39;)
-	Accuracy: 0.85880	Precision: 0.46762	Recall: 0.42600	F1: 0.44584	F2: 0.43372
-	Total predictions: 15000	True positives:  852	False positives:  970	False negatives: 1148	True negatives: 12030
+	Accuracy: 0.83100	Precision: 0.36803	Recall: 0.37300	F1: 0.37050	F2: 0.37200
+	Total predictions: 15000	True positives:  746	False positives: 1281	False negatives: 1254	True negatives: 11719
 
 </pre>
 </div>
@@ -12989,7 +13168,7 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
@@ -13004,12 +13183,28 @@ memory usage: 17.0+ KB
 
 <span class="c1">#PCA</span>
 <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">my_dataset2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">my_dataset1</span><span class="p">),</span>  <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">my_dataset2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">my_dataset1</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 <span class="n">my_dataset2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;poi&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">poi</span><span class="p">)</span>
 <span class="n">my_dataset2</span> <span class="o">=</span> <span class="n">my_dataset2</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span> <span class="o">=</span> <span class="s1">&#39;index&#39;</span><span class="p">)</span>  
 
-<span class="c1"># Tester</span>
-<span class="n">dump_classifier_and_data</span><span class="p">(</span><span class="n">clf_gnb_n</span><span class="p">,</span> <span class="n">my_dataset2</span><span class="p">,</span> <span class="n">features_list2</span><span class="p">)</span>
+<span class="c1"># Change the structure </span>
+<span class="n">features_list_full_pca</span> <span class="o">=</span> <span class="n">my_dataset2</span><span class="o">.</span><span class="n">itervalues</span><span class="p">()</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="c1"># POI at the first position for further use with preprocessing functions </span>
+<span class="n">features_list_full_pca</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;poi&#39;</span><span class="p">)</span>
+<span class="n">features_list_full_pca</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;poi&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use preprocessing functions </span>
+<span class="n">data_pca</span> <span class="o">=</span> <span class="n">featureFormat</span><span class="p">(</span><span class="n">my_dataset2</span><span class="p">,</span> <span class="n">features_list_full_pca</span><span class="p">)</span>
+<span class="n">labels_pca</span><span class="p">,</span> <span class="n">features_pca</span> <span class="o">=</span> <span class="n">targetFeatureSplit</span><span class="p">(</span><span class="n">data_pca</span><span class="p">)</span>
+
+<span class="c1"># Get the shuffled sets</span>
+<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">shuffle_split</span><span class="p">(</span><span class="n">labels_pca</span><span class="p">,</span> <span class="n">features_pca</span><span class="p">)</span>
+
+<span class="c1"># GaussianNB implementation on the reformatted data</span>
+<span class="n">clf_gnb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">clf_gnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+
+<span class="n">tester</span><span class="o">.</span><span class="n">dump_classifier_and_data</span><span class="p">(</span><span class="n">clf_gnb</span><span class="p">,</span> <span class="n">my_dataset2</span><span class="p">,</span> <span class="n">features_list_full_pca</span><span class="p">)</span>
 <span class="n">tester</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
 </pre></div>
 
@@ -13024,8 +13219,8 @@ memory usage: 17.0+ KB
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>GaussianNB(priors=None)
-	Accuracy: 0.99173	Precision: 0.94162	Recall: 1.00000	F1: 0.96993	F2: 0.98775
-	Total predictions: 15000	True positives: 2000	False positives:  124	False negatives:    0	True negatives: 12876
+	Accuracy: 0.99087	Precision: 0.93589	Recall: 1.00000	F1: 0.96688	F2: 0.98649
+	Total predictions: 15000	True positives: 2000	False positives:  137	False negatives:    0	True negatives: 12863
 
 </pre>
 </div>
@@ -13047,10 +13242,13 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># GaussianNB implementation</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Get the shuffled sets</span>
+<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">shuffle_split</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+
+<span class="c1"># GaussianNB</span>
 <span class="n">clf_gnb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
 <span class="n">clf_gnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">clf_gnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span>
@@ -13070,8 +13268,8 @@ memory usage: 17.0+ KB
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>GaussianNB(priors=None)
-	Accuracy: 0.84607	Precision: 0.38357	Recall: 0.25450	F1: 0.30598	F2: 0.27286
-	Total predictions: 15000	True positives:  509	False positives:  818	False negatives: 1491	True negatives: 12182
+	Accuracy: 0.84953	Precision: 0.40046	Recall: 0.25850	F1: 0.31419	F2: 0.27823
+	Total predictions: 15000	True positives:  517	False positives:  774	False negatives: 1483	True negatives: 12226
 
 </pre>
 </div>
@@ -13093,10 +13291,14 @@ memory usage: 17.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="c1"># Get the shuffled sets</span>
+<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">shuffle_split</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+
 <span class="n">clf_knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
 <span class="n">clf_knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
 
@@ -13118,8 +13320,8 @@ memory usage: 17.0+ KB
 <pre>KNeighborsClassifier(algorithm=&#39;auto&#39;, leaf_size=30, metric=&#39;minkowski&#39;,
            metric_params=None, n_jobs=1, n_neighbors=5, p=2,
            weights=&#39;uniform&#39;)
-	Accuracy: 0.86653	Precision: 0.49653	Recall: 0.07150	F1: 0.12500	F2: 0.08627
-	Total predictions: 15000	True positives:  143	False positives:  145	False negatives: 1857	True negatives: 12855
+	Accuracy: 0.87687	Precision: 0.82553	Recall: 0.09700	F1: 0.17360	F2: 0.11779
+	Total predictions: 15000	True positives:  194	False positives:   41	False negatives: 1806	True negatives: 12959
 
 </pre>
 </div>
@@ -13146,27 +13348,27 @@ memory usage: 17.0+ KB
 <tbody>
 <tr>
 <td>Decision tree</td>
-<td>0.46762</td>
-<td>0.42600</td>
-<td>0.44584</td>
+<td>0.36803</td>
+<td>0.37300</td>
+<td>0.37050</td>
 </tr>
 <tr>
 <td>GaussianNB (PCA and feature selection)</td>
-<td>0.94162</td>
+<td>0.93589</td>
 <td>1.00000</td>
-<td>0.96993</td>
+<td>0.96688</td>
 </tr>
 <tr>
 <td>GaussianNB (without PCA and feature selection)</td>
-<td>0.38357</td>
-<td>0.25450</td>
-<td>0.30598</td>
+<td>0.40046</td>
+<td>0.25850</td>
+<td>0.31419</td>
 </tr>
 <tr>
 <td>K Nearest Neighbours</td>
-<td>0.49653</td>
-<td>0.07150</td>
-<td>0.12500</td>
+<td>0.82553</td>
+<td>0.09700</td>
+<td>0.17360</td>
 </tr>
 </tbody>
 </table>
@@ -13180,7 +13382,7 @@ memory usage: 17.0+ KB
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Gaussian Naive Bayes with PCA and feature selection gives too high values of precision, recall, and F1 score (especially recall). I would not proceed with this one. 
-K Nearest Neighbours has high precision, but the worst recall, resulting in the lowest F1 score. Comparing Gaussian NB and decision trees, looks like decision trees work better in our case. Let's proceed with it and fine-tune the algorithm.</p>
+K Nearest Neighbours has high precision (actually, close to being overfit), but the worst recall, resulting in the lowest F1 score. Comparing Gaussian NB and decision trees, looks like decision trees work better in our case. Let's proceed with it and fine-tune the algorithm.</p>
 
 </div>
 </div>
@@ -13222,7 +13424,7 @@ K Nearest Neighbours has high precision, but the worst recall, resulting in the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span><span class="p">,</span> <span class="n">grid_search</span>
@@ -13251,7 +13453,7 @@ K Nearest Neighbours has high precision, but the worst recall, resulting in the 
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Best parameters: {&#39;min_samples_split&#39;: 5, &#39;splitter&#39;: &#39;best&#39;, &#39;min_samples_leaf&#39;: 6}
+<pre>Best parameters: {&#39;min_samples_split&#39;: 2, &#39;splitter&#39;: &#39;best&#39;, &#39;min_samples_leaf&#39;: 1}
 </pre>
 </div>
 </div>
@@ -13262,13 +13464,13 @@ K Nearest Neighbours has high precision, but the worst recall, resulting in the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[116]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Using the parameters</span>
-<span class="n">clf_tree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+<span class="n">clf_tree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
                              <span class="n">splitter</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">,</span>
-                             <span class="n">min_samples_leaf</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
+                             <span class="n">min_samples_leaf</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">clf_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
 
@@ -13289,11 +13491,11 @@ K Nearest Neighbours has high precision, but the worst recall, resulting in the 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>DecisionTreeClassifier(class_weight=None, criterion=&#39;gini&#39;, max_depth=None,
             max_features=None, max_leaf_nodes=None,
-            min_impurity_split=1e-07, min_samples_leaf=6,
-            min_samples_split=5, min_weight_fraction_leaf=0.0,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
             presort=False, random_state=None, splitter=&#39;best&#39;)
-	Accuracy: 0.85647	Precision: 0.44363	Recall: 0.30100	F1: 0.35865	F2: 0.32168
-	Total predictions: 15000	True positives:  602	False positives:  755	False negatives: 1398	True negatives: 12245
+	Accuracy: 0.83333	Precision: 0.37386	Recall: 0.37050	F1: 0.37217	F2: 0.37117
+	Total predictions: 15000	True positives:  741	False positives: 1241	False negatives: 1259	True negatives: 11759
 
 </pre>
 </div>
@@ -13321,7 +13523,7 @@ K Nearest Neighbours has high precision, but the worst recall, resulting in the 
 that generalize—that predict well for instances that we have not yet observed. If the patterns do not generalise, then we have created a model which is overfit.</p>
 <p>To avoid overfitting, validation is used to build and test a model. In this process, a trained model is evaluated with a testing subset, which is 'hold out' of the original dataset not used for training. The main purpose of using the testing data set is to test the generalisation ability of a trained model.</p>
 <p>However, creating training and testing sets by splitting without proper data shuffle could lead to uneven mix of data across classes, especially if data is skewed or grouped sequentally in the original dataset. Cross-validation is a proven approach to deal with this issue. Unlike splitting the data into one training and one holdout set, cross-validation computes its estimates over all the data by performing multiple splits and systematically swapping out samples for testing. Cross-validation begins by splitting a labeled dataset into k partitions called folds, and then then iterates training and testing k times when a different fold is chosen as the test data in each iteration of the cross-validation.</p>
-<p>In sklearn, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html">StratifiedShuffleSplit</a> can be used to implement cross-validation. This has been included in the testing function (tester.py), which shuffles the data and splits it into 1000 folds.</p>
+<p>In sklearn, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html">StratifiedShuffleSplit</a> can be used to implement cross-validation. This has been included in the testing function (tester.py), which shuffles the data and splits it into 1000 folds. We have already used StratifiedShuffleSplit for sets preparation in order to select the most significant features, train different classifiers, and fine-tune the best performing one.</p>
 
 </div>
 </div>
@@ -13344,7 +13546,7 @@ that generalize—that predict well for instances that we have not yet observed.
 <p><img src="images/pr_rec_f.png"></p>
 <ul>
 <li>Precision: the number of times the algorithm positively identifies a data point (known as a true positive) divided by the total number of positives (regardless of whether they were correct). High precision value means that POIs identified by the algorithm tended to be correct, while a low value means there were more false alarms (non-POIs flagged as POIs).</li>
-<li>Recall: the number of true positives divided by the sum of the true positives and the number of times the algorithm incorrectly negatively identified a data point (false negatives). A false negative would be represented by labeling a POI as a non-POI. </li>
+<li>Recall: number of events you can correctly recall divided by the the number of all correct events. In other words, this means that the number of correctly identified POIs (true positives) is divided by the number of POIs in the dataset (true positives + false negatives). A false negative would be represented by labeling a POI as a non-POI. </li>
 <li>F1 score: a weighted average of precision and recall. It’s calculated by multiplying the product of the recall and precision by two, and then dividing by the sum of the precision and recall. In our case, both precision and recall values of 0.3 had to be achieved using the final algorithm. </li>
 </ul>
 
@@ -13388,9 +13590,9 @@ that generalize—that predict well for instances that we have not yet observed.
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Results of evaluation using cross-validation on 1000 folds:</p>
 <ul>
-<li>Precision: 0.44363</li>
-<li>Recall: 0.30100</li>
-<li>F1 score: 0.35865</li>
+<li>Precision: 0.37386</li>
+<li>Recall: 0.37050</li>
+<li>F1 score: 0.37217</li>
 </ul>
 
 </div>
